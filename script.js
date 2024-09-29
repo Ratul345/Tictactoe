@@ -180,13 +180,29 @@ function highlightWinningCells() {
     // You can implement a similar logic as the original highlightWinningCells function if needed
 }
 
+startGameButton.addEventListener('click', () => {
+    playerXName = playerXInput.value || 'Player X';
+    playerOName = playerOInput.value || 'Player O';
+
+    scoreboard.style.display = 'block';
+    gameBoard.style.display = 'grid';
+    restartButton.style.display = 'inline-block';
+
+    currentPlayer = 'X'; // Start the game with Player X
+    messageDisplay.innerText = `${playerXName}'s turn`;
+    isGameActive = true;
+    resetGame();
+});
+
 function resetGame() {
     board = ['', '', '', '', '', '', '', '', ''];
-    isGameActive = true;
+    isGameActive = true; // Set game to active
+    currentPlayer = 'X'; // Set current player to 'X'
     cells.forEach(cell => {
-        cell.innerText = '';
-        cell.classList.remove('winner');
+        cell.innerText = ''; // Clear each cell
+        cell.classList.remove('winner'); // Remove winner class
     });
+    messageDisplay.innerText = `${playerXName}'s turn`; // Update message to show it's Player X's turn
 }
 
 restartButton.addEventListener('click', resetGame);
